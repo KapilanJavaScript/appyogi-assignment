@@ -1,0 +1,66 @@
+/* Page layout */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+}
+
+/* Keyboard outer border */
+.keyboard-border {
+  border: 2px solid #000;
+  padding: 0;
+}
+
+/* Keyboard grid */
+.keyboard-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 80px);
+  grid-template-rows: repeat(2, 60px);
+}
+
+/* Key styles */
+.key {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #333;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #fff;
+}
+
+/* Colors */
+.key.white {
+  background-color: #ffffff;
+}
+
+.key.yellow {
+  background-color: #ffff66;
+}
+
+.key.red {
+  background-color: #ff2d2d;
+}
+
+/* Control button */
+.control-button {
+  margin-top: 20px;
+  padding: 6px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.control-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Status text */
+.status-text {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #777;
+}
