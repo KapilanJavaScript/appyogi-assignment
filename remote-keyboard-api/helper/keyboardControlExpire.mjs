@@ -12,13 +12,10 @@ const handleControlExpiry = (acquired_on) => {
 };
 
 const checkAndRevokeControl = async (app) => {
-    console.log("is checking control expiry...");
     const control = await checkKeyboardControlDAL();
-    console.log("control from DB", control);
     if (!control || !control.acquired_on) return;
 
     const isExpired = handleControlExpiry(control?.acquired_on);
-    console.log("control", control, "isExpired", isExpired);
 
     if (isExpired) {
         await revokeControlDAL();
