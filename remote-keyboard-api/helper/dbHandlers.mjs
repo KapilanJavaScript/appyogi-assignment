@@ -18,8 +18,8 @@ const initDbConnection = async () => {
 }
 
 const executeQuery = async (query, params = []) => {
+  const connection = await poolConnection.getConnection();
   try {
-    const connection = await poolConnection.getConnection();
     const [rows] = await connection.query(query, params);
     return rows;
   } catch (err) {
