@@ -32,7 +32,7 @@ function App() {
 
     socket.emit('join', { user });
 
-    // 🔑 Key update from another user
+    // Key update from another user
     socket.on('keyboard:update', (payload) => {
       console.log("Keyboard update received:", user, payload);
       const { key_id, color } = payload;
@@ -51,7 +51,7 @@ function App() {
     // Control state update
     socket.on('control:update', ({ acquired_by }) => {
       console.log("Control update received:",user, acquired_by);
-      setHasControl(acquired_by);
+      setHasControl(Boolean(acquired_by));
       setControlUser(acquired_by);
     });
 
@@ -78,10 +78,10 @@ function App() {
             key_id: k.key_id,
             color: COLOR_MAP[k.color] || 'white'
           }));
-          setIsLoading(false);
-          setHasControl(keyboardStateResponse?.response?.keyboardControl);
+          setHasControl(Boolean(keyboardStateResponse?.response?.keyboardControl));
           setControlUser(keyboardStateResponse?.response?.keyboardControl);
           setKeys(mappedKeys);
+          setIsLoading(false);
         } else {
           alert(keyboardStateResponse?.message || "Failed to load keyboard state. Please try again later.");
         }
@@ -110,7 +110,7 @@ function App() {
       }
     } catch (error) {
       console.error("Error toggling key:", error);
-      alert(error?.message || "Failed to toggle key. Please try again later.");
+      alert("Failed to toggle key. Please try again later.");
     }
   };
 

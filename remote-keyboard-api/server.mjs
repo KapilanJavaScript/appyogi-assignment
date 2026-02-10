@@ -3,12 +3,12 @@ import http from "http";
 import cors from "cors";
 import { Server } from "socket.io";
 import dotenv from "dotenv";
-
-// routes
-import remoteKeyboardRouter from "./routes/remoteKeyboard.mjs";
 import { initDbConnection } from "./helper/dbHandlers.mjs";
 import responseMiddleware from "./middleware/responseHandler.mjs";
 import { startControlInterval, stopControlInterval } from "./helper/keyboardControlExpire.mjs";
+
+// routes
+import remoteKeyboardRouter from "./routes/remoteKeyboard.mjs";
 
 
 dotenv.config();
@@ -38,12 +38,12 @@ const io = new Server(server, {
   }
 });
 
-// ✅ Make io available everywhere
+// Make io available everywhere
 app.set('io', io);
 
 app.use('/keyboard', remoteKeyboardRouter);
 
-app.use(responseMiddleware);
+app.use(responseMiddleware); // global response middleware
 
 io.on("connection", (socket) => {
   console.log("User connected:", socket.id);
@@ -57,7 +57,7 @@ io.on("connection", (socket) => {
       startControlInterval(app);
     }
 
-    socket.join('keyboard-room'); // optional, but recommended
+    socket.join('keyboard-room');
   });
 
   socket.on("disconnect", () => {
@@ -76,7 +76,7 @@ async function startServer() {
     await initDbConnection();
 
     const port = process.env.PORT || 3000;
-    // listen happens ONCE here
+
     server.listen(port, () => {
       console.log(`Server + Socket.IO running on port ${port}`);
     });

@@ -3,11 +3,11 @@ import initDatabaseAndSchema from "../schema/keyBoardSchema.mjs";
 
 const initDbConnection = async () => {
   try {
-    // 1️⃣ Bootstrap DB + schema
+    // 1 create DB + schema
     await initDatabaseAndSchema();
     console.log('Database & schema ready');
 
-    // 2️⃣ Verify runtime pool connection
+    // 2 Verify runtime pool connection
     const connection = await poolConnection.getConnection();
     console.log('MySQL pool connected');
     connection.release();
@@ -18,8 +18,8 @@ const initDbConnection = async () => {
 }
 
 const executeQuery = async (query, params = []) => {
-  const connection = await poolConnection.getConnection();
   try {
+    const connection = await poolConnection.getConnection();
     const [rows] = await connection.query(query, params);
     return rows;
   } catch (err) {

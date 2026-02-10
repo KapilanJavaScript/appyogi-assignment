@@ -16,7 +16,6 @@ const checkAndRevokeControl = async (app) => {
     if (!control || !control.acquired_on) return;
 
     const isExpired = handleControlExpiry(control?.acquired_on);
-
     if (isExpired) {
         await revokeControlDAL();
 
@@ -29,6 +28,7 @@ const checkAndRevokeControl = async (app) => {
     }
 }
 
+// started when first user connects, stopped when last user disconnects
 const startControlInterval = (app) => {
     if (app.locals.controlInterval) return; // already running
     app.locals.controlInterval = setInterval(() => checkAndRevokeControl(app), CHECK_INTERVAL);

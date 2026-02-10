@@ -11,7 +11,7 @@ import {
 } from "../DAL/remoteKeyboardDAL.mjs";
 
 
-const getKeyboardStateBLL = async (userId) => {
+const getKeyboardStateBLL = async () => {
     const [keyBoardStateResult, userKeyboardControlResult] = await Promise.all([
         getKeyboardStateDAL(),
         checkKeyboardControlDAL() 

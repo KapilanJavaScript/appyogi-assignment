@@ -2,7 +2,7 @@ import mysql from 'mysql2/promise';
 import dotenv from "dotenv";
 dotenv.config();
 
-console.log('Connecting to the database...', process.env.DB_HOST, process.env.DB_USER, process.env.DB_NAME);
+console.log('Connecting to the database', process.env.DB_HOST, process.env.DB_USER, process.env.DB_NAME);
 const poolConnection = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,

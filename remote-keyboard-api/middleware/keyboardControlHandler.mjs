@@ -28,22 +28,20 @@ export const checkKeyboardControl = async (req, res, next) => {
         !isExpired;
 
         if (!hasValidControl) {
-            res.locals.response = responseConstructor({
-                statusCode: 401,
-                status: false,
-                message: 'You must acquire control before toggling a key',
-                response: null
-            });
-            return next();
-        }
-    } else if (control && !isExpired) {
-        res.locals.response = responseConstructor({
+          res.locals.response = responseConstructor({
             statusCode: 401,
             status: false,
-            message: 'Keyboard control is already acquired',
+            message: 'You must acquire control before toggling a key',
             response: null
-        });
-        return next();
+          });
+        }
+    } else if (control && !isExpired) {
+      res.locals.response = responseConstructor({
+        statusCode: 401,
+        status: false,
+        message: 'Keyboard control is already acquired',
+        response: null
+      });
     }
 
     // User has valid control

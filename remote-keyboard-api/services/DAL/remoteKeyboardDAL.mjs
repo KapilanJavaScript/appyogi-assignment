@@ -11,7 +11,7 @@ const checkKeyboardControlDAL = async (userId) => {
       SELECT acquired_by, acquired_on
       FROM keyboard_control
       WHERE id = 1
-    `;
+    `; // one row with current control status
     const [result] = await executeQuery(query);
     return result;
 };

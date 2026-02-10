@@ -22,7 +22,7 @@ const getKeyboardState = async(req, res, next) => {
                 response: null
             });
         } else {
-            const keyStateResponse = await getKeyboardStateBLL(userId);
+            const keyStateResponse = await getKeyboardStateBLL();
             if(keyStateResponse?.statusCode) {
                 response = keyStateResponse
             }
@@ -79,7 +79,7 @@ const toggleKey = async (req, res, next) => {
                 response = toggleKeyStateResponse;
             }
         } else {
-            res.locals.response = responseConstructor({
+            response = responseConstructor({
                 statusCode: 400,
                 status: false,
                 message: 'Invalid fields',
